@@ -2,36 +2,18 @@ import os
 import random
 import time
 
-field = [[],
-         [],
-         [],
-         [],
-         [],
-         [],
-         [],
-         [],
-         [],
-         []
-        ]
-newField = [
-         [],
-         [],
-         [],
-         [],
-         [],
-         [],
-         [],
-         [],
-         [],
-         []
-        ]
-n = 40
+field = []
+newField = []
+h = 10
+w = 40
 live = True
 score = 0
 
-def create(field, newField, n):
-    for i in range(0, len(field)):
-        for j in range(0, n):
+def create(field, newField, h, w):
+    for i in range(0, h):
+        field.append([])
+        newField.append([])
+        for j in range(0, w):
             field[i].append(0)
             newField[i].append(0)
 
@@ -103,8 +85,12 @@ def glider(field, x, y):
     field[x][y + 2] = 1
 
 if __name__ == "__main__":
-    create(field, newField, n)
-    fill(field, 30)
+    data_in = input("Введите целые числа высоту и ширину поля через пробел соответственно: ").split(" ")
+    h = int(data_in[0])
+    w = int(data_in[1])
+    chance = int(input("Введите плотность первого поколения(целое число от 1 до 100): "))
+    create(field, newField, h, w)
+    fill(field, chance)
     #glider(field, 4, 4)
     draw(field)
     while (live):
